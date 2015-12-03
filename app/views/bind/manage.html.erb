@@ -1,0 +1,15 @@
+<h2>WWPass bindings for <%= User.current %></h2>
+
+<% if !@puids.any? %>
+	<p>There are no WWPass Keysets bound.</p>
+<% end %>
+
+<ul>
+	<% @puids.each do |puid| %>
+		<li>
+			<%= puid.description %> [<%= puid.puid %>] 
+			<b><%= link_to 'Unbind', '/wwpass/unbind/'+puid.id.to_s, method: :delete, data: { confirm: 'Are you realy want to unbind WWPass Keyset?' } %></b>
+		</li>
+	<% end %>
+	<li><b><%= link_to 'Bind new WWPass Keyset', :controller => 'bind', :action => 'bind' %></b></li>
+</ul>

@@ -1,0 +1,44 @@
+<% content_for :header_tags do %>
+	<script type="text/javascript" src="//cdn.wwpass.com/packages/latest/wwpass.js" ></script>
+	<script type="text/javascript" src="//cdn.wwpass.com/packages/latest/wwpass.qrcode.min.js"></script>
+	<%= stylesheet_link_tag 'vk2', :plugin => 'wwpass_auth', :media => 'screen' %>
+	<%= javascript_include_tag "wwpass_button.js", :plugin => 'wwpass_auth' %>
+<% end %>
+
+<div class="highlight-gradient" style="width:410px; min-height: 180px; margin-left: auto; margin-right: auto; margin-top:30px;">
+	<div style="padding-bottom: 20px;">
+		<p style="color:#fff; font-size: 30px; text-align:center; line-height:26px;">New WWPass Binding</p>
+		<%= form_tag('/bind/wwpass', :id => 'wwpass_form') do %>
+			<input style="margin-left: 92px; margin-right: 92px;" type="text" id="puid_desc" name="puid_desc" size="28" placeholder="Description">
+			<input type="hidden" id="ticket" name="ticket" value=""/>
+		<% end %>
+		<div id='qrcode'></div>
+		<p class="btnlogin_position btn-deselect">
+			<button type='submit' id="btn-login" class="button-login" onclick="token_auth('<%= Wwpass.get_wwp_sp_name %>')">
+				<span class="button-login-icon"></span><span class="button-login-text">Bind WWPass</span>
+			</button>
+		</p>
+	</div>
+</div>
+
+<style type="text/css">
+    #qrcode img {
+		margin: auto;
+		margin-top: 20px;
+		padding: 20px;
+		border: 1 solid black;
+		background-color: white;
+	}
+</style>
+<script type="text/javascript">
+	options = {
+	    'render': 'qrcode',
+	    'ticketURL' : '/wwpass/ticket',
+	    /*'callbackURL': '<%= request.base_url %>' + '/bind/wwpass'        */
+	    callback: function(status, message) {
+	    	auth_cb(status, message);
+	    }
+	};
+	    
+	wwpassQRCodeAuth(options);
+</script>
