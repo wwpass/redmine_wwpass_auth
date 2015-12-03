@@ -11,7 +11,8 @@ module UserPatch
 
 		base.class_eval do
 			unloadable
-			has_many :puids, dependent: :delete_all 
+			has_many :puids, dependent: :delete_all
+			accepts_nested_attributes_for :puids
 		end
 	end
 

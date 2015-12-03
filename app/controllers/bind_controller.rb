@@ -26,7 +26,7 @@ class BindController < ApplicationController
 			if !Puid.find_by_puid(puid)
 				User.current.puids.create :puid => puid,
 							:user => user,
-							:description => descr.nil? || descr.empty? ? 'PassKey Lite or no description' : descr
+							:description => descr.nil? || descr.empty? ? 'Empty description' : descr
 				redirect_to :controller => 'bind', :action => 'manage'
 			else
 				flash.now[:error] = "This WWPass Keyset is already bind to another account"
