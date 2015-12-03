@@ -1,0 +1,7 @@
+# English strings go here for Rails i18n
+en:
+  # my_label: "My label"
+  label_wwpass_sp_cert: Service Provider's certificate file
+  label_wwpass_sp_key: Service Provider's key file
+  label_wwpass_ca_cert: WWPass CA certificate
+  label_sp_name: Service Provider's name

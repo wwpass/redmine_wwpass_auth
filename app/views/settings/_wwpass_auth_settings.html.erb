@@ -1,0 +1,73 @@
+<% flash.now[:error] = "#{l("label_wwpass_sp_cert")} #{l("activerecord.errors.messages.blank")}" if @settings['wwpass_sp_cert'].blank? %>
+<% flash.now[:error] = "#{l("label_wwpass_sp_key")} #{l("activerecord.errors.messages.blank")}" if @settings['wwpass_sp_key'].blank? %>
+<% flash.now[:error] = "#{l("label_wwpass_ca_cert")} #{l("activerecord.errors.messages.blank")}" if @settings['wwpass_ca_cert'].blank? %>
+<% flash.now[:error] = "#{l("label_sp_name")} #{l("activerecord.errors.messages.blank")}" if @settings['wwpass_sp_name'].blank? %>
+
+<!-- <p>
+  <label><%= l(:label_wwpass_sp_cert) %><span class="required"> *</span></label>
+  <%= text_field_tag 'settings[wwpass_sp_cert]', @settings['wwpass_sp_cert'], :size => 100 %>
+  <br />
+  <em><%= l(:label_example) %>: /etc/ssl/certs/wwpass_sp.cert</em>
+</p>
+
+<p>
+  <label><%= l(:label_wwpass_sp_key) %><span class="required"> *</span></label>
+  <%= text_field_tag 'settings[wwpass_sp_key]', @settings['wwpass_sp_key'], :size => 100 %>
+  <br />
+  <em><%= l(:label_example) %>: /etc/ssl/certs/wwpass_sp.key</em>
+</p>
+
+<p>
+  <label><%= l(:label_wwpass_ca_cert) %><span class="required"> *</span></label>
+  <%= text_field_tag 'settings[wwpass_ca_cert]', @settings['wwpass_ca_cert'], :size => 100 %>
+  <br />
+  <em><%= l(:label_example) %>: /etc/ssl/certs/wwpass_ca.cert</em>
+</p>
+
+<p>
+  <label><%= l(:label_sp_name) %><span class="required"> *</span></label>
+  <%= text_field_tag 'settings[wwpass_sp_name]', @settings['wwpass_sp_name'], :size => 50 %>
+  <br />
+  <em><%= l(:label_example) %>: MyRedmineSite.com</em>
+</p> -->
+
+<table>
+  <tbody>
+    <tr>
+      <th><%= l(:label_wwpass_sp_cert) %><span class="required"> *</span></th>
+      <td>
+        <input  type="text" id="settings_wwpass_sp_cert" 
+                value="<%= settings['wwpass_sp_cert'] %>" 
+                name="settings[wwpass_sp_cert]" 
+                size="50"> 
+      </td>
+    </tr>
+    <tr>
+      <th><%= l(:label_wwpass_sp_key) %><span class="required"> *</span></th>
+      <td>
+        <input  type="text" id="settings_wwpass_sp_key" 
+                value="<%= settings['wwpass_sp_key'] %>" 
+                name="settings[wwpass_sp_key]" 
+                size="50"> 
+      </td>
+    </tr>
+    <tr>
+      <th><%= l(:label_wwpass_ca_cert) %><span class="required"> *</span></th>
+      <td>
+        <input  type="text" id="settings_wwpass_ca_cert" 
+                value="<%= settings['wwpass_ca_cert'] %>" 
+                name="settings[wwpass_ca_cert]" 
+                size="50"> 
+      </td>
+    </tr>
+    <tr>
+      <th><%= l(:label_sp_name) %><span class="required"> *</span></th>
+      <td>
+        <input  type="text" id="settings_wwpass_sp_name" 
+                value="<%= settings['wwpass_sp_name'] %>" 
+                name="settings[wwpass_sp_name]" 
+                size="50"> 
+      </td>
+    </tr>
+  </tbody>
+</table>

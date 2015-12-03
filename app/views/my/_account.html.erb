@@ -1,0 +1,22 @@
+<% content_for :header_tags do %>
+
+	<script type="text/javascript" src="//cdn.wwpass.com/packages/latest/wwpass.js"/>
+	<%= stylesheet_link_tag 'vk', :plugin => 'wwpass_auth' %>
+	<%= javascript_include_tag 'wwpass_button.js', :plugin => 'wwpass_auth' %>
+<% end %>
+
+
+<p>
+	<tr>
+		<td>
+			<label>WWPass Keyset</label>
+			<% if Puid.user_has_puid? %>
+				<b><a href="/wwpass/bind">Bind</a></b>
+				<!-- <input type="button" value="Bind WWPass Keyset" 
+					onclick="window.location.href = '/bind'" /> -->
+			<% else %>
+				<b><%= link_to 'Unbind', '/wwpass/unbind', method: :delete, data: { confirm: 'Are you realy want to unbind WWPass Keyset?' } %></b>
+			<% end %>
+		</td>
+	</tr>
+</p>

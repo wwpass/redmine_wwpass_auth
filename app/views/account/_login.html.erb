@@ -1,0 +1,31 @@
+<% content_for :header_tags do %>
+	<meta http-equiv=”X-UA-Compatible” content=”IE=10″ />
+	<%= stylesheet_link_tag 'vk', :plugin => 'wwpass_auth' %>
+	<script type="text/javascript" src="//cdn.wwpass.com/packages/latest/wwpass.js" ></script>
+<% end %>
+
+<div id="wwpass-login-form">
+	<%= form_tag(signin_path, :id => 'wwpass_form') do %>
+		<table>
+			<tr>
+			    <td>
+			      <a href="#" style="margin-top:15px;" id="wwpass_button" onclick="token_auth('<%= Setting.plugin_wwpass_auth['wwpass_sp_name'] %>')" ></a>
+			    </td>
+			</tr>
+			<tr>
+				<td style="text-align:center">
+			    	<p id="wwp-message-header"> </p>
+			     	<p id="wwp-message-p"> </p>
+			    </td>
+			</tr>
+			<input type="hidden" id="ticket" name="ticket" value=""/>
+		</table>
+	<% end %>
+</div>
+
+<style type="text/css">
+	#wwpass-login-form table {margin-top:5em; padding:1em; margin-left: auto; margin-right: auto; border: 2px solid #FDBF3B; background-color:#FFEBC1; }
+	#wwpass-login-form table td {padding: 6px;}
+	#wwpass-login-form label {font-weight: bold;}
+	/*#login-form input#username, #login-form input#password { width: 300px; }*/
+</style>
