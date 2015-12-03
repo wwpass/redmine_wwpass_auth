@@ -1,1 +1,1 @@
-# redmine_wwpass_auth
+# WWPass Redmine authentication
