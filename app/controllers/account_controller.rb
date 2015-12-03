@@ -1,5 +1,5 @@
 class AccountController < ApplicationController
-  before_filter :invoke_wwpass_patch
+  before_filter :invoke_wwpass_patch, :require_login
   unloadable 
 
   protected

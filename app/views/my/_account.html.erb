@@ -10,13 +10,7 @@
 	<tr>
 		<td>
 			<label>WWPass Keyset</label>
-			<% if Puid.user_has_puid? %>
-				<b><a href="/wwpass/bind">Bind</a></b>
-				<!-- <input type="button" value="Bind WWPass Keyset" 
-					onclick="window.location.href = '/bind'" /> -->
-			<% else %>
-				<b><%= link_to 'Unbind', '/wwpass/unbind', method: :delete, data: { confirm: 'Are you realy want to unbind WWPass Keyset?' } %></b>
-			<% end %>
+			<b><%= link_to 'Manage', :controller => 'bind', :action => 'manage' %></b>
 		</td>
 	</tr>
 </p>

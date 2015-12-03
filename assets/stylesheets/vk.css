@@ -173,7 +173,7 @@ textarea.form-ctr {
             border-right:1px solid #b2b7ac;
             display:inline-block;
             vertical-align:middle;
-            background: url('./login-icon.png') left center no-repeat;
+            background: url('../images/login-icon.png') left center no-repeat;
             }
         .button-login-text {
             font-size:18px;

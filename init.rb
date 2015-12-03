@@ -13,7 +13,7 @@ Redmine::Plugin.register :wwpass_auth do
   name 'Wwpass Authentication Plugin'
   author 'WWPass Corporation'
   description 'This plugin adds WWPass authentication into Redmine application'
-  version '0.0.1'
+  version '0.1.0'
   url 'http://example.com/path/to/plugin'
   author_url 'http://wwpass.com/'
 

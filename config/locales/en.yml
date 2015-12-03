@@ -5,3 +5,6 @@ en:
   label_wwpass_sp_key: Service Provider's key file
   label_wwpass_ca_cert: WWPass CA certificate
   label_sp_name: Service Provider's name
+  h1_login_with_wwpass: WWPass Authentication
+  h3_login_qrcode_login: Scan the QR-code with WWPass PassKey Lite app to login
+  h3_login_passkey_login: Or click the button below to login with WWPass PassKey

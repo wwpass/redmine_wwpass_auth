@@ -1,31 +1,42 @@
 <% content_for :header_tags do %>
-	<meta http-equiv=”X-UA-Compatible” content=”IE=10″ />
-	<%= stylesheet_link_tag 'vk', :plugin => 'wwpass_auth' %>
 	<script type="text/javascript" src="//cdn.wwpass.com/packages/latest/wwpass.js" ></script>
+	<script type="text/javascript" src="//cdn.wwpass.com/packages/latest/wwpass.qrcode.min.js"></script>
 <% end %>
 
-<div id="wwpass-login-form">
-	<%= form_tag(signin_path, :id => 'wwpass_form') do %>
-		<table>
-			<tr>
-			    <td>
-			      <a href="#" style="margin-top:15px;" id="wwpass_button" onclick="token_auth('<%= Setting.plugin_wwpass_auth['wwpass_sp_name'] %>')" ></a>
-			    </td>
-			</tr>
-			<tr>
-				<td style="text-align:center">
-			    	<p id="wwp-message-header"> </p>
-			     	<p id="wwp-message-p"> </p>
-			    </td>
-			</tr>
+<div class="highlight-gradient" style="width:410px; min-height: 180px; margin-left: auto; margin-right: auto; margin-top:30px;">
+	<div style="padding-bottom: 20px;">
+		<p style="color:#fff; font-size: 30px; text-align:center; line-height:26px;">WWPass Authentication</p>
+		<div id='qrcode'></div>
+		<p class="btnlogin_position btn-deselect">
+			<button type='submit' id="btn-login" class="button-login" onclick="token_auth('<%= Wwpass.get_wwp_sp_name %>')">
+				<span class="button-login-icon"></span><span class="button-login-text">Sign In with WWPass</span>
+			</button>
+		</p>
+		<%= form_tag(signin_path, :id => 'wwpass_form') do %>
 			<input type="hidden" id="ticket" name="ticket" value=""/>
-		</table>
-	<% end %>
+		<% end %>
+	</div>
 </div>
 
 <style type="text/css">
-	#wwpass-login-form table {margin-top:5em; padding:1em; margin-left: auto; margin-right: auto; border: 2px solid #FDBF3B; background-color:#FFEBC1; }
-	#wwpass-login-form table td {padding: 6px;}
-	#wwpass-login-form label {font-weight: bold;}
-	/*#login-form input#username, #login-form input#password { width: 300px; }*/
+#qrcode img {
+	margin: auto;
+	margin-top: 20px;
+	padding: 20px;
+	border: 1 solid black;
+	background-color: white;
+}
 </style>
+
+<script type="text/javascript">
+	options = {
+	    'render': 'qrcode',
+	    'ticketURL' : '/wwpass/ticket',
+	    // 'callbackURL': '<%= request.base_url %>' + '/login'       
+	    callback : function(status, message) {
+	    	auth_cb(status, message);
+	    }
+	};
+	    
+	wwpassQRCodeAuth(options);
+</script>

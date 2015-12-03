@@ -5,17 +5,6 @@ require_dependency 'account_controller'
 
 module AccountControllerPatch
 
-=begin
-	def self.included(base)
-		base.send(:include, InstanceMethods)
-
-		base.class_eval do
-			unloadable
-		end
-	end
-=end
-
-
 	def self.included(base)
       base.send(:include, InstanceMethods)
 
@@ -40,43 +29,37 @@ module AccountControllerPatch
 				begin
 					wwp = WWPass.new(cert_file, key_file, cert_ca)
 					puid = wwp.get_puid(wwp.put_ticket(params[:ticket]))
-					user = User.find_by_puid(puid)
+					wwp_user = Puid.find_by_puid(puid)
 
-					if user.nil?
-						flash.now[:error] = "This is no any account with this WWPass Keyset"
+					if wwp_user.nil?
+						err_msg = "This WWPass key is not bound to any account"
+						flash.now[:error] = err_msg
+						logger.info err_msg + "[puid = " + puid + "]"
 						return
 					else
-						if !user.active?
-							flash.now[:error] = "This is no any account with this WWPass Keyset"
+						if !wwp_user.user.active?
+							err_msg "This WWPass key is not bound to any account"
+							flash.now[:error] = err_msg
+							logger.info err_msg + "[puid = " + puid + "]"
 							return
 						end
+						user = wwp_user.user
 						user.update_attribute(:last_login_on, Time.now) if user && !user.new_record?
+						logger.info user.login + " logged in successfully"
 						self.logged_user = user
-						return
+						redirect_back_or_default home_url#, :referer => true
+						#return
 					end
 				rescue Exception => msg
 					flash.now[:error] = 'WWPass authentication error! Please, check your plugin settings or contact administrator.'
 					logger.info msg.inspect
 					return
 				end
-
-=begin
-				if try_wwpass_auth(params[:ticket])
-					redirect_back_or_default :controller => 'my', :action => 'page'
-					return
-				else
-					flash.now[:error] = "This is no any account with this WWPass Keyset"
-					return
-				end
-=end
-
+			else
+				login_without_wwpass
 			end
-
-			login_without_wwpass
 		end
-
 	end
-
 end
 
 AccountController.send(:include, AccountControllerPatch)

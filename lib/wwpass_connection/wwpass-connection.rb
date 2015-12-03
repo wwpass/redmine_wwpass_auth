@@ -20,7 +20,7 @@ class WWPass
   end
 
   def get_name
-    ticket = get_ticket('', 0)
+    ticket = get_ticket()
     pos = ticket.index(':')
     if pos != nil
       ticket[0, pos]
@@ -29,6 +29,14 @@ class WWPass
     end
   end
 
+  def get_ticket
+    get_ticket('', 120)
+  end
+
+  def get_ticket(ttl = 120)
+    get_ticket('', ttl)
+  end
+  
   def get_ticket(auth_type = '', ttl=120)
     make_request('GET', 'get', :params => {:ttl => ttl, :auth_type => auth_type})
   end
@@ -77,15 +85,15 @@ class WWPass
     end
     if response['result']
       if response['encoding'] == 'plain'
-        response['data']
+        return response['data']
       else
-        Base64.decode64 response['data']
+        return Base64.decode64 response['data']
       end
     else
       #exception
       if attempts > 1
         attempts = attempts - 1
-        make_request(method, command, params, attempts)
+        return make_request(method, command, params, attempts)
       else
         raise WWPassException.new 'SPFE return error: ', response['data']
       end
